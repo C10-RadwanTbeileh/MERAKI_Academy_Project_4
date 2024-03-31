@@ -30,22 +30,21 @@ const createNewProduct = (req, res) => {
     });
 };
 
-const getProductByCategoriesId = (req,res)=>{
-    const id = req.params.id;
-    
-    ProductModel
-    .findOne({categoriesId:id})
+const getProductByCategoriesId = (req, res) => {
+  const id = req.params.id;
+
+  ProductModel.findOne({ categoriesId: id })
     .then((result) => {
-        if (!result) {
-            return res.status(404).json({
-              success: false,
-              message: `Product By This Categories not found`,
-            });
-          }
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `Product By This Categories not found`,
+        });
+      }
       res.status(201).json({
         success: true,
         message: `Product `,
-        product : result,
+        product: result,
       });
     })
     .catch((err) => {
@@ -55,24 +54,23 @@ const getProductByCategoriesId = (req,res)=>{
         err: err.message,
       });
     });
-}
+};
 
-const getProductById = (req,res)=>{
-    const id = req.params.id;
-    
-    ProductModel
-    .findOne({_id:id})
+const getProductById = (req, res) => {
+  const id = req.params.id;
+
+  ProductModel.findOne({ _id: id })
     .then((result) => {
-        if (!result) {
-            return res.status(404).json({
-              success: false,
-              message: `Product By This Id not found`,
-            });
-          }
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `Product By This Id not found`,
+        });
+      }
       res.status(201).json({
         success: true,
         message: `Product `,
-        product : result,
+        product: result,
       });
     })
     .catch((err) => {
@@ -82,12 +80,45 @@ const getProductById = (req,res)=>{
         err: err.message,
       });
     });
-}
+};
 
-const upDateProductById = (req,res)=>{}
+const upDateProductById = (req, res) => {
+  const update = req.body;
+  const id = req.params.id;
 
-const deleteProductById = (req,res)=>{}
+  Object.keys(update).forEach((key) => {
+    update[key] == "" && delete update[key];
+  });
 
+  ProductModel.findByIdAndUpdate({ _id: id }, req.body, { new: true })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          success: false,
+          message: `Product not found`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `Product upDate`,
+        categories: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+};
 
+const deleteProductById = (req, res) => {};
 
-module.exports = { createNewProduct,getProductByCategoriesId, getProductById,upDateProductById,deleteProductById};
+module.exports = {
+  createNewProduct,
+  getProductByCategoriesId,
+  getProductById,
+  upDateProductById,
+  deleteProductById,
+};
