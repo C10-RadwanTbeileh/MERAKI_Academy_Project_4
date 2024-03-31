@@ -1,7 +1,7 @@
 const CategoriesModel = require("../models/categories");
 
 const createNewCategories = (req, res) => {
-  const { name , image } = req.body;
+  const { name, image } = req.body;
   const newCategories = new CategoriesModel({ name, image });
   newCategories
     .save()
@@ -9,7 +9,7 @@ const createNewCategories = (req, res) => {
       res.status(201).json({
         success: true,
         message: `Categories created`,
-        categories : result,
+        categories: result,
       });
     })
     .catch((err) => {
@@ -21,15 +21,29 @@ const createNewCategories = (req, res) => {
     });
 };
 
+const getAllCategories = (req, res) => {
+  CategoriesModel
+  .find({})
+  .then((result) => {
+    res.status(201).json({
+      success: true,
+      message: `Categories`,
+      categories: result,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server Error`,
+      err: err.message,
+    });
+  });
+};
 
-const getAllCategories = (req,res)=>{
+const upDateCategoriesById = (req, res) => {};
 
-}
-
-
-const upDateCategories =(req,res)=>{
-    
-}
-
-
-module.exports = { createNewCategories,getAllCategories ,upDateCategories};
+module.exports = {
+  createNewCategories,
+  getAllCategories,
+  upDateCategoriesById,
+};
