@@ -7,12 +7,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const usersRouter = require("./routes/users");
+const roleRouter = require("./routes/role")
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/users", usersRouter);
-
+app.use("/role", roleRouter);
 
 
 

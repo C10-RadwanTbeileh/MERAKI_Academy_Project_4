@@ -1,7 +1,6 @@
 const usersModel = require("../models/users");
 
 
-
 const register = (req, res) => {
   const { firstName, lastName, age, country, email, password , phonNumber } = req.body;
   const user = new usersModel({
