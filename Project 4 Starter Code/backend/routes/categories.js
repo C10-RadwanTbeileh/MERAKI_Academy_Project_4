@@ -5,7 +5,7 @@ const categoriesRouter = express.Router();
 
 categoriesRouter.post("/create", createNewCategories);
 categoriesRouter.get("/", getAllCategories);
-categoriesRouter.put("/update", upDateCategoriesById);
+categoriesRouter.put("/update/:id", upDateCategoriesById);
 
 
 module.exports = categoriesRouter;
