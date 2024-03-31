@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+
 
 const productSchema = new mongoose.Schema({
   availability: { type: Boolean },
@@ -7,7 +7,6 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true },
   size: { type: String },
-  password: { type: String },
   image: { type: String },
   categoriesId: { type: mongoose.Schema.Types.ObjectId, ref: "Categories" },
 });
