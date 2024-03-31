@@ -4,9 +4,9 @@ const { createNewCart,getCartByUserId,upDateCartById,deleteCartById} = require("
 const cartRouter = express.Router();
 
 cartRouter.post("/create", createNewCart);
-cartRouter.get("/byUserId", getCartByUserId);
-cartRouter.put("/update", upDateCartById);
-cartRouter.delete("/delete", deleteCartById);
+cartRouter.get("/byUserId/:id", getCartByUserId);
+cartRouter.put("/update/:id", upDateCartById);
+cartRouter.delete("/delete/:id", deleteCartById);
 
 
 
