@@ -21,11 +21,36 @@ const createNewCart = (req, res) => {
     });
 };
 
-const getCartByUserId = (req, res) => {};
+const getCartByUserId = (req, res) => {
+
+};
 
 const upDateCartById = (req, res) => {};
 
-const deleteCartById = (req, res) => {};
+const deleteCartById = (req, res) => {
+    const id = req.params.id;
+
+    CartModel.findByIdAndDelete({ userId: id })
+      .then((result) => {
+        if (!result) {
+          return res.status(404).json({
+            success: false,
+            message: `Cart By This UserId not found`,
+          });
+        }
+        res.status(201).json({
+          success: true,
+          message: `Cart deleted`,
+          product: result,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });};
 
 module.exports = {
   createNewCart,
