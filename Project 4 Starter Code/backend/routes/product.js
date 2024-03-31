@@ -4,8 +4,8 @@ const { createNewProduct ,getProductByCategoriesId, getProductById,upDateProduct
 const productRouter = express.Router();
 
 productRouter.post("/create", createNewProduct);
-productRouter.get("/byCategories", getProductByCategoriesId);
-productRouter.get("/byId", getProductById);
+productRouter.get("/byCategories/:id", getProductByCategoriesId);
+productRouter.get("/byId/:id", getProductById);
 productRouter.put("/update", upDateProductById);
 productRouter.delete("/delete", deleteProductById);
 

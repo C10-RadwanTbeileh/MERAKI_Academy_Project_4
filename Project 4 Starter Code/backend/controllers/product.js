@@ -30,9 +30,36 @@ const createNewProduct = (req, res) => {
     });
 };
 
-const getProductByCategoriesId = (req,res)=>{}
+const getProductByCategoriesId = (req,res)=>{
+    const id = req.params.id;
+    
+    ProductModel
+    .findOne({categoriesId:id})
+    .then((result) => {
+        if (!result) {
+            return res.status(404).json({
+              success: false,
+              message: `Product By This Categories not found`,
+            });
+          }
+      res.status(201).json({
+        success: true,
+        message: `Product `,
+        product : result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
+}
 
-const getProductById = (req,res)=>{}
+const getProductById = (req,res)=>{
+
+}
 
 const upDateProductById = (req,res)=>{}
 
