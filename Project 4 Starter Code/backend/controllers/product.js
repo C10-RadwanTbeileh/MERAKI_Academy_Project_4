@@ -113,7 +113,41 @@ const upDateProductById = (req, res) => {
     });
 };
 
-const deleteProductById = (req, res) => {};
+const deleteProductById = (req, res) => {
+
+    const id = req.params.id;
+
+    ProductModel.findByIdAndDelete({ _id: id })
+      .then((result) => {
+        if (!result) {
+          return res.status(404).json({
+            success: false,
+            message: `Product By This Id not found`,
+          });
+        }
+        res.status(201).json({
+          success: true,
+          message: `Product deleted`,
+          product: result,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });
+
+
+
+
+
+
+
+
+
+};
 
 module.exports = {
   createNewProduct,
