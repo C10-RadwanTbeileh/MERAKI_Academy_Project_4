@@ -30,4 +30,14 @@ const createNewProduct = (req, res) => {
     });
 };
 
-module.exports = { createNewProduct };
+const getProductByCategoriesId = (req,res)=>{}
+
+const getProductById = (req,res)=>{}
+
+const upDateProductById = (req,res)=>{}
+
+const deleteProductById = (req,res)=>{}
+
+
+
+module.exports = { createNewProduct,getProductByCategoriesId, getProductById,upDateProductById,deleteProductById};

@@ -21,4 +21,15 @@ const createNewCategories = (req, res) => {
     });
 };
 
-module.exports = { createNewCategories };
+
+const getAllCategories = (req,res)=>{
+
+}
+
+
+const upDateCategories =(req,res)=>{
+    
+}
+
+
+module.exports = { createNewCategories,getAllCategories ,upDateCategories};
