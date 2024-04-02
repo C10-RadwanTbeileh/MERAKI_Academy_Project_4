@@ -49,12 +49,14 @@ const register = (req, res) => {
 };
 
 const login = (req, res) => {
-  const {email} = req.body.email.toLowerCase();
-  const {password} = req.body;
+  const email = req.body.email.toLowerCase();
+  const password = req.body.password;
+  
   usersModel
-    .findOne({ email: email })
+    .findOne({email})
     .populate("role","_id")
     .then(async (result) => {
+      
       if (!result) {
         return res.status(403).json({
           success: false,

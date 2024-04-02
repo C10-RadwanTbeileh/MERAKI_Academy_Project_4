@@ -48,7 +48,34 @@ const getCartByUserId = (req, res) => {
 };
 
 const upDateCartById = (req, res) => {
-
+    const update = req.body;
+    const id = req.params.id;
+  
+    Object.keys(update).forEach((key) => {
+      update[key] == "" && delete update[key];
+    });
+  
+    CartModel.findByIdAndUpdate({ _id: id }, req.body, { new: true })
+      .then((result) => {
+        if (!result) {
+          return res.status(404).json({
+            success: false,
+            message: `Cart  not found`,
+          });
+        }
+        res.status(200).json({
+          success: true,
+          message: `Product upDate`,
+          categories: result,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: `Server Error`,
+          err: err.message,
+        });
+      });
 
 };
 
