@@ -65,12 +65,12 @@ const upDateCartByUserId = (req, res) => {
 //delete product
 const deleteProductByUserId = (req, res) => {
   const id = req.token.userId;
-  const deleteProduct = req.body.product;
+  const deleteProduct = req.params.id;
   console.log(id);
   console.log(deleteProduct);
   CartModel.findOneAndUpdate(
     { userId: id },
-    { $pull: { product: deleteProduct } },
+    { $pull: { products: { _id: deleteProduct } } },
     { new: true }
   )
     .then((result) => {

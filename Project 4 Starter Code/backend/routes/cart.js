@@ -8,7 +8,7 @@ const cartRouter = express.Router();
 
 cartRouter.get("/byUserId/:id" , getCartByUserId);
 cartRouter.put("/update",authentication , upDateCartByUserId);
-cartRouter.delete("/delete",authentication, deleteProductByUserId);
+cartRouter.delete("/delete/:id",authentication, deleteProductByUserId);
 cartRouter.put("/updateQuantity",authentication , upDateQuantityByUserIdAndProductId);
 
 
