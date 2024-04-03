@@ -35,25 +35,25 @@ const register = (req, res) => {
         author: result,
       });
 
-// creat cart
+      // creat cart
 
-  const newCart = new CartModel({userId:result._id});
-  newCart
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        success: true,
-        message: `Cart created`,
-        categories: result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        message: `Server Error`,
-        err: err.message,
-      });
-    });
+      const newCart = new CartModel({ userId: result._id });
+      newCart
+        .save()
+        .then((result) => {
+          res.status(201).json({
+            success: true,
+            message: `Cart created`,
+            categories: result,
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({
+            success: false,
+            message: `Server Error`,
+            err: err.message,
+          });
+        });
     })
     .catch((err) => {
       if (err.keyPattern) {
@@ -73,18 +73,18 @@ const register = (req, res) => {
 const login = (req, res) => {
   const email = req.body.email.toLowerCase();
   const password = req.body.password;
-  
+
   usersModel
-    .findOne({email})
-    .populate("role","_id")
+    .findOne({ email })
+    .populate("role", "_id")
     .then(async (result) => {
-      
       if (!result) {
         return res.status(403).json({
           success: false,
           message: `The email doesn't exist or The password you’ve entered is incorrect`,
         });
-      } try {
+      }
+      try {
         const valid = await bcrypt.compare(password, result.password);
         if (!valid) {
           return res.status(403).json({
@@ -94,7 +94,7 @@ const login = (req, res) => {
         }
         const payload = {
           userId: result._id,
-          userName : result.firstName,
+          userName: result.firstName,
           role: result.role,
           country: result.country,
         };
@@ -108,11 +108,11 @@ const login = (req, res) => {
           message: `Valid login credentials`,
           token: token,
         });
-      }catch (error) {
+      } catch (error) {
         throw new Error(error.message);
       }
     })
-  .catch((err) => {
+    .catch((err) => {
       res.status(500).json({
         success: false,
         message: `Server Error`,

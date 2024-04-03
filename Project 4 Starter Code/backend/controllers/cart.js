@@ -134,5 +134,5 @@ module.exports = {
   getCartByUserId,
   upDateCartByUserId,
   deleteProductByUserId,
-  upDateQuantityByUserIdAndProductId
+  upDateQuantityByUserIdAndProductId,
 };
