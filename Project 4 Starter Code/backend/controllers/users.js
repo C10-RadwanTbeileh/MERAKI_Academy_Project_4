@@ -1,4 +1,6 @@
 const usersModel = require("../models/users");
+const CartModel = require("../models/cart");
+
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
@@ -32,6 +34,26 @@ const register = (req, res) => {
         message: `Account Created Successfully`,
         author: result,
       });
+
+// creat cart
+
+  const newCart = new CartModel({userId:result._id});
+  newCart
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        success: true,
+        message: `Cart created`,
+        categories: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
     })
     .catch((err) => {
       if (err.keyPattern) {
