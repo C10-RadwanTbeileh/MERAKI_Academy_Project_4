@@ -13,7 +13,7 @@ const register = (req, res) => {
     email,
     password,
     phonNumber,
-    role,
+    // role,
   } = req.body;
   const user = new usersModel({
     firstName,
@@ -22,7 +22,7 @@ const register = (req, res) => {
     country,
     email,
     password,
-    role,
+    role :"6609deaa3a617c2ceb64c4b4",
     phonNumber,
   });
 
@@ -76,7 +76,7 @@ const login = (req, res) => {
 
   usersModel
     .findOne({ email })
-    .populate("role", "_id")
+    .populate("role")
     .then(async (result) => {
       if (!result) {
         return res.status(403).json({

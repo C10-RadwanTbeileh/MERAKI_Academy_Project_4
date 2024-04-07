@@ -1,0 +1,10 @@
+.Home{
+    display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr  ;
+        gap: 20px;
+        align-items: center;
+        color: rgb(148, 7, 127);
+        font-size: larger;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+        
+}

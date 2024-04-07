@@ -14,6 +14,7 @@ const createNewProduct = (req, res) => {
   });
   newProduct
     .save()
+    .populate("categories")
     .then((result) => {
       res.status(201).json({
         success: true,
@@ -33,7 +34,7 @@ const createNewProduct = (req, res) => {
 const getProductByCategoriesId = (req, res) => {
   const id = req.params.id;
 
-  ProductModel.findOne({ categoriesId: id })
+  ProductModel.find({ categoriesId: id })
     .then((result) => {
       if (!result) {
         return res.status(404).json({

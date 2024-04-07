@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 
 const Login = () => {
   const [massage, setMassage] = useState("");
@@ -37,10 +37,11 @@ const Login = () => {
               password,
             })
             .then((result) => {
-              navigate("/Home");
+            
               setIsLoggedIn(true);
               setToken(result.data.token);
               localStorage.setItem("token", result.data.token);
+              navigate("/Home");
             })
             .catch((error) => {
               setMassage(error);

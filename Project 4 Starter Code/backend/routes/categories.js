@@ -5,9 +5,9 @@ const authorization = require("../middleware/authorization")
 
 const categoriesRouter = express.Router();
 
-categoriesRouter.post("/create",authentication ,authorization(""), createNewCategories);
-categoriesRouter.get("/",authentication ,authorization(""), getAllCategories);
-categoriesRouter.put("/update/:id",authentication ,authorization(""), upDateCategoriesById);
+categoriesRouter.post("/create",authentication, createNewCategories);
+categoriesRouter.get("/",authentication, getAllCategories);
+categoriesRouter.put("/update/:id",authentication , upDateCategoriesById);
 
 
 module.exports = categoriesRouter;

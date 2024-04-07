@@ -1,0 +1,9 @@
+.Product{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr; 
+    gap: 10px, 15px;
+    grid-auto-rows: 2px;
+    align-items: center;
+
+}
