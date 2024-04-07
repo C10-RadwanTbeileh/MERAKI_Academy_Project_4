@@ -6,6 +6,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
+import Product from "./components/Product";
+import Com404 from "./components/Com404";
 import { Routes, Route, Link, json } from "react-router-dom";
 
 export const UserContext = createContext();
@@ -20,14 +22,16 @@ const App = () => {
       <UserContext.Provider value={{ setIsLoggedIn, setToken, token }}>
         <NavBar />
         <Home />
-        {/* {?:} */}
+        <Product/>
+        {isLoggedIn?<></>:<></>}
         <Routes>
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Favorite" element={<Favorite />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Product" element={<Product />} />
 
-          {/* <Route path='*' element={<Com404/>} /> */}
+          <Route path='*' element={<Com404/>} />
         </Routes>
       </UserContext.Provider>
     </div>
