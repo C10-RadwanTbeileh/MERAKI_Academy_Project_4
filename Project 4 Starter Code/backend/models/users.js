@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   phonNumber: { type: String, required: true },
   role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
+  wishList:[ { type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
 });
 
 userSchema.pre("save", async function () {

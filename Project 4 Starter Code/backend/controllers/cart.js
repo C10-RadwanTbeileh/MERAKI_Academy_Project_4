@@ -27,10 +27,10 @@ const getCartByUserId = (req, res) => {
       });
     });
 };
-//many product
+//put product in cart
 const upDateCartByUserId = (req, res) => {
   const products = req.body;
-  console.log(req.token.userId);
+//   console.log(req.token.userId);
   const id = req.token.userId;
 
   CartModel.findOneAndUpdate(
@@ -40,7 +40,6 @@ const upDateCartByUserId = (req, res) => {
   )
     .then((result) => {
       if (!result) {
-        // create new prod/>> new cart
         return res.status(404).json({
           success: false,
           message: `Product or Cart  not found`,
@@ -97,14 +96,14 @@ const deleteProductByUserId = (req, res) => {
 };
 //update Quantity
 const upDateQuantityByUserIdAndProductId = (req, res) => {
-  const { productID, quantity } = req.body;
+  const { productID, quantity ,price} = req.body;
   console.log(req.token.userId);
   const id = req.token.userId;
 
   CartModel.findOneAndUpdate(
-    { userId: id, "products._id": productID },
-    { $set: { "products.$.quantity": quantity } },
-    { new: true }
+    { userId: id, "products.product": productID },
+    { $set: { "products.$.quantity": quantity , "products.$.price":price} },
+    {new: true}
   )
 
     .then((result) => {

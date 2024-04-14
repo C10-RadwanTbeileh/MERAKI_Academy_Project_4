@@ -23,6 +23,7 @@ const createNewCategories = (req, res) => {
 
 const getAllCategories = (req, res) => {
   CategoriesModel.find({})
+  
     .then((result) => {
       res.status(201).json({
         success: true,

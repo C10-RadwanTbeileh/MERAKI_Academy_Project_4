@@ -35,6 +35,7 @@ const getProductByCategoriesId = (req, res) => {
   const id = req.params.id;
 
   ProductModel.find({ categoriesId: id })
+  .populate("categoriesId")
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -87,9 +88,6 @@ const upDateProductById = (req, res) => {
   const update = req.body;
   const id = req.params.id;
 
-  Object.keys(update).forEach((key) => {
-    update[key] == "" && delete update[key];
-  });
 
   ProductModel.findByIdAndUpdate({ _id: id }, req.body, { new: true })
     .then((result) => {
