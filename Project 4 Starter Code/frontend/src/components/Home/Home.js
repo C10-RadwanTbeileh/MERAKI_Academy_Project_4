@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 import axios from "axios";
-import "./Home.css"
+import "./Home.css";
 const Home = () => {
   const [massage, setMassage] = useState("");
   const { token } = useContext(UserContext);
@@ -27,27 +27,41 @@ const Home = () => {
   }, []);
 
   return (
-    <div >
-        <div  style={{ backgroundImage:"url(https://www.yorku.ca/foodservices/wp-content/uploads/sites/50/2022/09/Copy-of-Diet.png)",height: "500px",backgroundRepeat: "no-repeat",backgroundAttachment: "fixed" ,alignItems: "center",backgroundSize: "cover"}}>
+    <div>
+      <div
+        style={{
+          backgroundImage:
+            "url(https://www.yorku.ca/foodservices/wp-content/uploads/sites/50/2022/09/Copy-of-Diet.png)",
+          height: "500px",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+          alignItems: "center",
+          backgroundSize: "cover",
+        }}
+      ></div>
+      <div className="Home">
+        {categories &&
+          categories.map((categories, i) => {
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  //   console.log("from home", categories.image);
+                  navigate(`/Product/${categories._id}`);
+                }}
+                style={{
+                  backgroundImage: `url(${categories.image})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                  width: "250px",
+                  height: "250px",
+                }}
+              >
+                {categories.name}
+              </div>
+            );
+          })}{" "}
       </div>
-
-      {categories &&
-        categories.map((categories, i) => {
-          return (
-          <div className="Home" >
-            <div
-              key={i}
-              onClick={() => {
-                console.log("from home",categories.image);
-                navigate(`/Product/${categories._id}`);
-              }} style={{
-                backgroundImage : `url(${categories.image})`,backgroundRepeat: 'no-repeat',backgroundPosition: "center",
-                width:'250px', height:'250px'}}
-            >
-              {categories.name}
-            </div></div>
-          );
-        })}
     </div>
   );
 };

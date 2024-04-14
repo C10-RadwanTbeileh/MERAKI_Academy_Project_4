@@ -1,8 +1,8 @@
 import React from 'react'
-
+import "./Com404.css"
 const Com404 = () => {
     return (
-        <div>
+        <div className='Com404'>
             
         </div>
     )

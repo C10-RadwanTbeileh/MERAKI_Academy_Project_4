@@ -1,0 +1,10 @@
+.Com404{
+    padding-bottom: 655px;
+    background-image: url("https://i.pinimg.com/474x/62/d2/43/62d2436eed00d70903a99f1ef0b70186.jpg");
+    background-size: cover;
+        font-size: larger;
+        font-weight: 500px;
+        font-style: italic;
+        width: 100%;
+        background-attachment: "fixed";
+}

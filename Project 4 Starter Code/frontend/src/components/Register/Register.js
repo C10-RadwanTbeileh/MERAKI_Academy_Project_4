@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import "./Register.css";
 const Register = () => {
   const [massage, setMassage] = useState();
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Register = () => {
   const [password, setPassword] = useState();
 
   return (
-    <div>
+    <div className="Register">
       <input
         type="text"
         placeholder="FirstName"
@@ -82,16 +82,16 @@ const Register = () => {
         onClick={() => {
           axios
             .post("http://localhost:5000/users/register", {
-                firstName,
-                lastName,
-                age,
-                country,
-                email,
-                password,
-                phonNumber,
+              firstName,
+              lastName,
+              age,
+              country,
+              email,
+              password,
+              phonNumber,
             })
             .then((result) => {
-              navigate("/login");
+              navigate("/Login");
               setMassage(result.data.massage);
             })
             .catch((error) => {
@@ -101,7 +101,8 @@ const Register = () => {
       >
         {" "}
         Register{" "}
-      </button><br></br>
+      </button>
+      <br></br>
       {massage}
     </div>
   );
