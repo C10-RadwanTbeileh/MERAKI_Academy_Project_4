@@ -101,8 +101,8 @@ const upDateQuantityByUserIdAndProductId = (req, res) => {
   const id = req.token.userId;
 
   CartModel.findOneAndUpdate(
-    { userId: id, "products.product": productID },
-    { $set: { "products.$.quantity": quantity , "products.$.price":price} },
+    { userId: id , "products.product": productID },
+    { $set: { "products.$.quantity": quantity , "products.$.price" : price} },
     {new: true}
   )
 
