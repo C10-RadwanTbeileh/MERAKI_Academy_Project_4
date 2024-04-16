@@ -7,7 +7,6 @@ const Login = () => {
   const [massage, setMassage] = useState("");
   const navigate = useNavigate();
   const { setIsLoggedIn, setToken ,setUserName,setUserId} = useContext(UserContext);
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
@@ -40,7 +39,6 @@ const Login = () => {
               setIsLoggedIn(true);
               setToken(result.data.token);
               localStorage.setItem("token", result.data.token);
-              console.log(result.data);
               setUserName(result.data.userName)
               setUserId(result.data.userId)
               localStorage.setItem("userId",result.data.userId)
@@ -48,6 +46,7 @@ const Login = () => {
             })
             .catch((error) => {
               setMassage(error);
+              console.log(error);
             });
         }}
       >

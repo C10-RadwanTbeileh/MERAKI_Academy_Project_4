@@ -9,6 +9,7 @@ const Cart = () => {
   const { token, userId } = useContext(UserContext);
   const [product1, setProduct] = useState([]);
   const navigate = useNavigate();
+  const [priceArray, setPriceArray] = useState();
 
   useEffect(() => {
     axios
@@ -18,18 +19,27 @@ const Cart = () => {
       .then((result) => {
         setProduct(result.data.product.products);
         // console.log(result.data.product.products);
-        // console.log(result);
+        setPriceArray(result.data.product.products);
       })
       .catch((error) => {
         setMassage(error.response.data.message);
-        // console.log(error);
       });
   }, []);
-  // console.log(product)
+
+  // console.log(priceArray);
+  let avr = 0;
+  const sum = () => {
+    for (let index = 0; index < priceArray.length; index++) {
+      avr = avr +  priceArray[index].price;
+    }
+  };
+  
+  
   return (
     <div>
       {massage}
 
+      {priceArray&&  sum() }
       {product1 &&
         product1.map((product, i) => {
           return (
@@ -40,11 +50,9 @@ const Cart = () => {
                   style={{ width: "200px", height: "200px" }}
                 />
               </div>
-
               <div>
                 <p>quantity : {product.quantity}</p>
-                <p>price : {product.price}</p>
-
+                <p>price : {product.price} $</p>
                 <button
                   onClick={() => {
                     axios
@@ -55,14 +63,16 @@ const Cart = () => {
                         }
                       )
                       .then((result) => {
-                        console.log(result);
                         
-                        let prod = product1.filter((pro) => {
-                          pro._id !== product._id;
-                        });
+                        const prod = product1.filter(
+                          (pro) => pro._id !== product._id
+                        );
                         setProduct(prod);
-
                         navigate("/Cart");
+                        const pri = priceArray.filter(
+                          (pro) => pro._id !== product._id
+                        );
+                        setPriceArray(pri);
                       })
                       .catch((error) => {
                         setMassage(error.response.data.message);
@@ -75,6 +85,9 @@ const Cart = () => {
             </div>
           );
         })}
+
+      <p>Total Price :{avr} $</p>
+      <button>Check Out</button>
     </div>
   );
 };

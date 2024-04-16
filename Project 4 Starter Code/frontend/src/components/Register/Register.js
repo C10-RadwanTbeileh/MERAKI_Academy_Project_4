@@ -5,7 +5,6 @@ import "./Register.css";
 const Register = () => {
   const [massage, setMassage] = useState();
   const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [phonNumber, setPhoneNumber] = useState();
@@ -91,8 +90,9 @@ const Register = () => {
               phonNumber,
             })
             .then((result) => {
-              navigate("/Login");
+              
               setMassage(result.data.massage);
+              navigate("/Login");
             })
             .catch((error) => {
               setMassage(error.response.data.message);

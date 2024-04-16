@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import axios from "axios";
-// import NavBar from "../NavBar/NavBar";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Product.css";
 const Product = () => {
-  // product by categories
+
   const [massage, setMassage] = useState("");
   const [product, setProducts] = useState([]);
   const { token, userId } = useContext(UserContext);
   const navigate = useNavigate();
   const { id } = useParams();
   const [productID, setProduct_id] = useState();
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(1);
-
   const [checkCart, setCheckCart] = useState("");
 
   useEffect(() => {
@@ -22,8 +20,6 @@ const Product = () => {
       .get(`http://localhost:5000/cart/byUserId/${userId}`)
       .then((result) => {
         setCheckCart(result.data.product.products);
-        console.log(result.data.product.products);
-        //.product._id
       })
       .catch((error) => {
         setMassage(error.response.data.message);
@@ -31,18 +27,18 @@ const Product = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("from product", token.userId);
+
     axios
       .get(`http://localhost:5000/product/byCategories/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((result) => {
         setProducts(result.data.product);
-        // console.log(result.data.product);
+        
       })
       .catch((error) => {
         setMassage(error.response.data.message);
-        // console.log(error);
+        
       });
   }, []);
 
@@ -61,25 +57,17 @@ const Product = () => {
                 />
               </div>
 
-              <div>
-                <p>{product.title}</p>
-                <p>{product.price}</p>
-                <p>{`${product.availability}`}</p>
-                <p>{product.description}</p>
-                <p>{product.size}</p>
-                <p>{`${product.categoriesId.name}`}</p>
+              <div className="description">
+                <p>Title : {product.title}</p>
+                <p>Price:{product.price} $</p>
+                <p>Availability : {`${product.availability}`}</p>
+                <p>Description : {product.description}</p>
+                <p>Size : {product.size}</p>
+                <p>Categories : {`${product.categoriesId.name}`}</p>
 
                 <button
                   onClick={() => {
                     setPrice(product.price);
-                    console.log(product._id);
-                    //for *** checkCart.find(product._id)
-                    console.log(
-                      checkCart.find(
-                        (element) => element.product._id == product._id
-                      )
-                    ); //array
-
                     if (
                       !checkCart.find(
                         (element) => element.product._id == product._id
@@ -90,13 +78,12 @@ const Product = () => {
                           "http://localhost:5000/cart/update",
                           {
                             product: product._id,
+                            price:product.price
                           },
                           { headers: { Authorization: `Bearer ${token}` } }
                         )
                         .then((result) => {
-                          console.log(result.data.products);
                           setProduct_id(result.data.products._id);
-// setPrice(result.data.products.products.price)
                           navigate("/cart");
                         })
                         .catch((error) => {
@@ -114,11 +101,8 @@ const Product = () => {
                           { headers: { Authorization: `Bearer ${token}` } }
                         )
                         .then((result) => {
-                          
                           setQuantity(quantity + 1);
                           setPrice( price + product.price);
-
-                          
                         })
                         .catch((error) => {
                           setMassage(error);
@@ -139,10 +123,7 @@ const Product = () => {
                         { headers: { Authorization: `Bearer ${token}` } }
                       )
                       .then((result) => {
-                        console.log(result.data);
-                        // setProduct_id(result.data.products._id);
-
-                        // navigate("/Favorite");
+                        navigate("/Favorite");
                       })
                       .catch((error) => {
                         console.log(error)

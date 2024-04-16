@@ -7,9 +7,6 @@ const Home = () => {
   const [massage, setMassage] = useState("");
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
-
-  // useEffect for categories
-
   const [categories, setCategories] = useState();
 
   useEffect(() => {
@@ -19,7 +16,6 @@ const Home = () => {
       })
       .then((result) => {
         setCategories(result.data.categories);
-        // console.log(result.data.categories);
       })
       .catch((error) => {
         setMassage(error.response.data.message);
@@ -46,7 +42,6 @@ const Home = () => {
               <div
                 key={i}
                 onClick={() => {
-                  //   console.log("from home", categories.image);
                   navigate(`/Product/${categories._id}`);
                 }}
                 style={{
