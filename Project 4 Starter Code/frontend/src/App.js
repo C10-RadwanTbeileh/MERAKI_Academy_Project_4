@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import NavBar from "./components/NavBar/NavBar";
 import Product from "./components/Product/Product";
 import Com404 from "./components/Com404/Com404";
+import CheckOut from "./components/CheckOut/CheckOut";
 import { Routes, Route } from "react-router-dom";
 
 export const UserContext = createContext();
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Product/:id" element={<Product />} />
+          <Route path="/cart/CheckOut" element={<CheckOut />} />
 
           <Route path="*" element={<Com404 />} />
         </Routes>

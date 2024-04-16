@@ -103,7 +103,8 @@ const Register = () => {
         Register{" "}
       </button>
       <br></br>
-      {massage}
+      <div>
+      {typeof massage === 'string' ? massage : null}</div>
     </div>
   );
 };

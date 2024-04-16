@@ -87,7 +87,7 @@ const Cart = () => {
         })}
 
       <p>Total Price :{avr} $</p>
-      <button>Check Out</button>
+      <button onClick={()=>{navigate("./CheckOut")}}>Check Out</button>
     </div>
   );
 };
